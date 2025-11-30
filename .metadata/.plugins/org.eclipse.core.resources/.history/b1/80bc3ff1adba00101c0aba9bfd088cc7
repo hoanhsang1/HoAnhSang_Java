@@ -1,0 +1,20 @@
+package bai1;
+import java.util.Scanner;
+public class Mainprogram {
+
+	public static void main(String[] args) {
+		Scanner inform = new Scanner(System.in);
+		Xuly xl = new Xuly();
+		
+		System.out.println("Viết chương trình in ra tổng của 10 số chẵn đầu tiên (sử dụng vòng lặp for hoặc while)");
+//		System.out.println('');
+//		System.out.println();
+//		System.out.println();
+//		System.out.println();
+//		System.out.println();
+//		System.out.println();
+//		System.out.println();
+//		
+	}
+
+}

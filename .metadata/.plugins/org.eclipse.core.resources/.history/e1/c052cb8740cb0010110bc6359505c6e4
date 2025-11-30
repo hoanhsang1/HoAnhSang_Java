@@ -1,0 +1,12 @@
+package baitap;
+import libTest.MyLib;
+
+public class Bai4 {
+	
+	
+	public static void main (String [] args) {
+	//	MyLib a = new MyLib();
+		int b = MyLib.inputINT();
+		System.out.println(b);
+	}
+}

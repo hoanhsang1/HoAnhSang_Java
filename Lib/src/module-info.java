@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+module Lib {
+	exports libTest;
+}

@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+module Buoi9 {
+	requires textlib;
+}

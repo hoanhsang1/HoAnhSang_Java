@@ -1,0 +1,54 @@
+package bai1;
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class Xuly {
+	public int inputINT() {
+		int result;
+		Scanner inform = new Scanner(System.in);
+		while (true) {
+			try {
+				result = inform.nextInt();
+				break;
+			} catch (InputMismatchException e) {
+				System.err.println("! Lỗi dữ liệu: Vui lòng chỉ nhập số nguyên.");
+				System.out.print("Vui lòng nhập lại dữ liệu: ");
+				inform.next();
+				continue;
+			}
+		}
+		inform.close();
+		return result;
+	}
+	
+//	========================================================
+//							Câu1
+//	========================================================
+	
+	public int cau1(int n) {
+		int result = 0;
+		for(int i=0; i<=n; i++) {
+			result += i*2;
+		}
+		return result;
+	}
+	
+//	========================================================
+//							Câu2
+//	========================================================
+	
+	public void cau2() {
+		Scanner inform = new Scanner(System.in);
+		System.out.print("Nhập giá trị của a: ");
+		int a = inputINT();
+		System.out.print("Nhập giá trị của b: ");
+		int b = inputINT();
+		if (a%2 !=0) {
+			a++;
+		}
+		for (int i=a; a<=b; i =i+2) {
+			System.out.print(i);
+		}
+		inform.close();
+	}
+}

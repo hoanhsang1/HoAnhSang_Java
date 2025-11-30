@@ -1,0 +1,11 @@
+package ktr;
+
+public class Mainprogram {
+	public static void main(String[] args) {
+        TaiKhoan tk = new TaiKhoan();
+        tk.setSoTK(123);
+        tk.NapTien(10000000);
+        tk.RutTien(100);
+        tk.thongTin();
+    }
+}
