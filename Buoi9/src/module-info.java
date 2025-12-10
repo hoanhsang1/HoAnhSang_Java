@@ -1,4 +1,4 @@
 module Buoi9 {
-	requires libTest;
+	
 	requires Lib;
 }
