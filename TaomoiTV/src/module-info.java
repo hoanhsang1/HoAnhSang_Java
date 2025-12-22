@@ -1,0 +1,3 @@
+module TaomoiTV {
+	exports TaomoiTV;
+}

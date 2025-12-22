@@ -3,6 +3,7 @@
 	<item key="org.eclipse.jdt.ui.last.selected.jre.kind2" value="2"/>
 	<item key="org.eclipse.jdt.ui.last.selected.execution.enviroment" value="JavaSE-21"/>
 	<item key="org.eclipse.jdt.ui.lastextjar" value="D:\java\Thuvien"/>
+	<item key="org.eclipse.jdt.ui.last.external.project" value="D:\bt"/>
 	<section name="completion_proposal_size">
 	</section>
 	<section name="quick_assist_proposal_size">
@@ -21,7 +22,7 @@
 		<item key="height" value="400"/>
 	</section>
 	<section name="NewPackageCreationWizard.dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="706"/>
+		<item key="DIALOG_X_ORIGIN" value="442"/>
 		<item key="DIALOG_Y_ORIGIN" value="235"/>
 		<item key="DIALOG_WIDTH" value="525"/>
 		<item key="DIALOG_HEIGHT" value="500"/>
@@ -31,7 +32,7 @@
 		<item key="create_package_info_java" value="false"/>
 	</section>
 	<section name="NewClassCreationWizard.dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="681"/>
+		<item key="DIALOG_X_ORIGIN" value="393"/>
 		<item key="DIALOG_Y_ORIGIN" value="85"/>
 		<item key="DIALOG_WIDTH" value="574"/>
 		<item key="DIALOG_HEIGHT" value="659"/>
@@ -45,8 +46,8 @@
 		<item key="create_unimplemented" value="true"/>
 	</section>
 	<section name="JavaProjectWizard.dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="595"/>
-		<item key="DIALOG_Y_ORIGIN" value="8"/>
+		<item key="DIALOG_X_ORIGIN" value="706"/>
+		<item key="DIALOG_Y_ORIGIN" value="222"/>
 		<item key="DIALOG_WIDTH" value="746"/>
 		<item key="DIALOG_HEIGHT" value="799"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
@@ -91,6 +92,7 @@
 		<item key="JarManifestWizardPage.MANIFEST_LOCATION" value=""/>
 		<item key="JarManifestWizardPage.SEAL_JAR" value="false"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="D:\java\Thuvien\TaomoiTV.jar"/>
 			<item value="D:\java\Thuvien\libTest.jar"/>
 			<item value="D:\java\Thuvien\libText.jar"/>
 			<item value="D:\java\Thuvien\textlib.jar"/>
