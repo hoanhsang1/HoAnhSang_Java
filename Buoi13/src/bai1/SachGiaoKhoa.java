@@ -1,68 +1,78 @@
 package bai1;
 
 import TaomoiTV.Test;
-import java.time.LocalDate;
 
 public class SachGiaoKhoa extends Sach {
-    // Tình trạng: 'mới' hoặc 'cũ'
-    protected String tinhTrang; 
-
-    // Constructor không tham số
+    // Thuộc tính riêng
+    private String tinhTrang; // "moi" hoặc "cu"
+    
+    // Constructor
     public SachGiaoKhoa() {
         super();
-        this.tinhTrang = "";
     }
-
-    // Constructor có tham số
-    public SachGiaoKhoa(String maSach, LocalDate ngayNhap, double donGia, int soLuong, String nhaXuatBan, String tt) {
-        super(maSach, ngayNhap, donGia, soLuong, nhaXuatBan);
-        this.tinhTrang = tt;
+    
+    // Getter - Setter
+    public String getTinhTrang() {
+        return tinhTrang;
     }
-
-    // Ghi đè phương thức Nhập
+    
+    public void setTinhTrang(String tinhTrang) {
+        if (tinhTrang.equalsIgnoreCase("moi") || tinhTrang.equalsIgnoreCase("cu")) {
+            this.tinhTrang = tinhTrang;
+        } else {
+            this.tinhTrang = "moi";
+        }
+    }
+    
+    // Override phương thức tính thành tiền
     @Override
-    public void nhap() {
-        super.nhap(); // Nhập thông tin Sach cơ bản
-        System.out.println("--- NHẬP THÔNG TIN SÁCH GIÁO KHOA ---");
+    public double tinhThanhTien() {
+        if (tinhTrang.equalsIgnoreCase("moi")) {
+            return soLuong * donGia;
+        } else { // sách cũ
+            return soLuong * donGia * 0.5;
+        }
+    }
+    
+    // Phương thức nhập thông tin sách giáo khoa
+    public void nhapThongTin() {
+        System.out.println("\n=== NHẬP THÔNG TIN SÁCH GIÁO KHOA ===");
         
-        // Nhập Tình trạng, chỉ cho phép 'mới' hoặc 'cũ'
+        // Nhập thông tin chung từ lớp cha
+        super.nhapThongTin();
+        
+        // Nhập tình trạng sách
         while (true) {
-            String tt = Test.inputNonEmptyString("  Nhập Tình trạng (mới/cũ): ").toLowerCase();
-            if (tt.equals("mới") || tt.equals("cũ")) {
+            String tt = Test.inputNonEmptyString("Tình trạng (moi/cu): ").toLowerCase();
+            if (tt.equals("moi") || tt.equals("cu")) {
                 this.tinhTrang = tt;
                 break;
             }
-            System.out.println("  Lỗi: Tình trạng phải là 'moi' hoặc 'cu'. Vui lòng nhập lại.");
+            System.out.println("Tình trạng phải là 'moi' hoặc 'cu'!");
         }
     }
-
-    // Ghi đè phương thức tính thành tiền
+    
+    // Phương thức xuất thông tin sách giáo khoa
     @Override
-    public double tinhThanhTien() {
-        if (this.tinhTrang.equals("moi")) {
-            // Nếu mới: thành tiền = số lượng * đơn giá
-            return this.soLuong * this.donGia;
-        } else {
-            // Nếu cũ: thành tiền = số lượng * đơn giá * 50%
-            return this.soLuong * this.donGia * 0.5;
-        }
+    public void xuatThongTin() {
+        super.xuatThongTin();
+        System.out.printf("%-10s %-12s\n",
+            tinhTrang,
+            String.format("%.2f", tinhThanhTien()));
     }
     
-    // Phương thức Xuất (hiển thị chi tiết)
-    public void xuat() {
-        String separator = "-".repeat(110);
-        System.out.println(separator);
-        System.out.printf("| %-20s | %-10s | %-12s | %-10s | %-8s | %-20s | %-12s | %-15s |\n", 
-            "LOẠI SÁCH", "Mã sách", "Ngày nhập", "Đơn giá", "SL", "NXB", "Tình trạng", "Thành tiền");
-        System.out.println(separator);
-
-        System.out.printf("| %-20s", "Sách Giáo Khoa");
-        System.out.print(super.xuatCoBan());
-        System.out.printf(" | %-12s | %-15.2f |", tinhTrang, tinhThanhTien());
-        System.out.println();
-        System.out.println(separator);
+    // Phương thức xuất tiêu đề
+    public static void xuatTieuDe() {
+        System.out.println("\n══════════════════════════════════════════════════════════════════════════════════════════════════════════");
+        System.out.println("                                     DANH SÁCH SÁCH GIÁO KHOA");
+        System.out.println("══════════════════════════════════════════════════════════════════════════════════════════════════════════");
+        System.out.printf("%-10s %-12s %-12s %-8s %-15s %-10s %-12s\n",
+            "Mã sách", "Ngày nhập", "Đơn giá", "SL", "Nhà XB", "T.trạng", "Thành tiền");
+        System.out.println("──────────────────────────────────────────────────────────────────────────────────────────────────────────");
     }
     
-    // Getter cho Tình trạng (cần nếu muốn lọc theo tình trạng)
-    public String getTinhTrang() { return tinhTrang; }
+    // Triển khai Comparable để sử dụng sắp xếp từ thư viện
+    public int compareTo(SachGiaoKhoa other) {
+        return this.maSach.compareTo(other.maSach);
+    }
 }

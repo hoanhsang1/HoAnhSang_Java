@@ -11,7 +11,7 @@ public class Xulycau1 {
 				result = inform.nextInt();
 				break;
 			} catch (InputMismatchException e) {
-				System.err.println("! Lỗi dữ liệu: Vui lòng chỉ nhập số nguyên.");
+				System.out.println("! Lỗi dữ liệu: Vui lòng chỉ nhập số nguyên.");
 				System.out.print("Vui lòng nhập lại dữ liệu: ");
 				inform.next();
 				continue;
@@ -25,6 +25,7 @@ public class Xulycau1 {
 		int lenList = inputINT();
 		int[] result = new int[lenList];
 		for (int i=0; i<lenList; i++) {
+			System.out.print("Vui lòng nhập dữ liệu thứ: "+i);
 			result[i] = inputINT();
 		}
 		return result;
@@ -126,10 +127,10 @@ public class Xulycau1 {
 	
 	public void cau7() {
 		System.out.print("Nhập giá trị của a: ");
-		int a = inputINT();
+		float a = inputINT();
 		System.out.print("Nhập giá trị của b: ");
-		int b = inputINT();
-		int result = 0;
+		float b = inputINT();
+		float result = 0;
 		if(a!=0) {
 			result = -b/a;
 			System.out.println("x có giá trị là: "+result);

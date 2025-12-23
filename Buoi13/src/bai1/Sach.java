@@ -1,56 +1,112 @@
 package bai1;
 
-import TaomoiTV.Test;
 import java.time.LocalDate;
-// Sử dụng LocalDate để quản lý Ngày nhập
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+import TaomoiTV.Test;
 
-public abstract class Sach {
+public class Sach {
+    // Thuộc tính chung
     protected String maSach;
     protected LocalDate ngayNhap;
     protected double donGia;
     protected int soLuong;
     protected String nhaXuatBan;
-
-    // Constructor không tham số (Luôn luôn có)
-    public Sach() {}
-
-    public Sach(String ms, LocalDate day, double dg, int sl, String nxb) {
-    	this.maSach=ms;
-    	this.ngayNhap=day;
-    	this.donGia=dg;
-    	this.soLuong=sl;
-    	this.nhaXuatBan=nxb;
-		
-	}
-
-	// Phương thức Nhập thông tin chung
-    public void nhap() {
-        System.out.println("--- NHẬP THÔNG TIN SÁCH ---");
-        // Dùng thư viện Test của bạn
-        this.maSach = Test.inputNonEmptyString("  Nhập Mã sách: ");
-        
-        // Giả sử Test.inputDate nhập ngày tháng năm theo định dạng "dd/MM/yyyy"
-        this.ngayNhap = Test.inputDate("  Nhập Ngày nhập"); 
-        
-        // Đơn giá và Số lượng phải dương (Sử dụng hàm inputPositiveDouble/Int đã thống nhất)
-        this.donGia = Test.inputPositiveDouble("  Nhập Đơn giá (> 0): ");
-        this.soLuong = Test.inputPositiveInt("  Nhập Số lượng (> 0): ");
-        this.nhaXuatBan = Test.inputNonEmptyString("  Nhập Nhà xuất bản: ");
+    
+    private Scanner sc;
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
+    // Constructor
+    public Sach() {
+        sc = new Scanner(System.in);
     }
     
-    // Phương thức Xuất thông tin chung
-    public String xuatCoBan() {
-        // Dùng định dạng ngày tháng của Test
-        String ngay = ngayNhap != null ? ngayNhap.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "N/A";
-        return String.format("| %-10s | %-12s | %-10.2f | %-8d | %-20s", 
-            maSach, ngay, donGia, soLuong, nhaXuatBan);
+    // Getter - Setter
+    public String getMaSach() {
+        return maSach;
     }
     
-    // Phương thức trừu tượng: Tính thành tiền (bắt buộc lớp con phải định nghĩa)
-    public abstract double tinhThanhTien();
+    public void setMaSach(String maSach) {
+        this.maSach = maSach;
+    }
     
-    // Getters cần thiết cho việc xử lý ở lớp QuanLySach
-    public double getDonGia() { return donGia; }
-    public String getNhaXuatBan() { return nhaXuatBan; }
-    public String getMaSach() { return maSach; }
+    public LocalDate getNgayNhap() {
+        return ngayNhap;
+    }
+    
+    public void setNgayNhap(LocalDate ngayNhap) {
+        this.ngayNhap = ngayNhap;
+    }
+    
+    public double getDonGia() {
+        return donGia;
+    }
+    
+    public void setDonGia(double donGia) {
+        this.donGia = donGia;
+    }
+    
+    public int getSoLuong() {
+        return soLuong;
+    }
+    
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+    
+    public String getNhaXuatBan() {
+        return nhaXuatBan;
+    }
+    
+    public void setNhaXuatBan(String nhaXuatBan) {
+        this.nhaXuatBan = nhaXuatBan;
+    }
+    
+    // Phương thức tính thành tiền (sẽ được override bởi lớp con)
+    public double tinhThanhTien() {
+        return 0;
+    }
+    
+    // Phương thức nhập thông tin chung
+    public void nhapThongTin() {
+        this.maSach = Test.inputNonEmptyString("Mã sách: ");
+        
+        // Nhập ngày với kiểm tra không được ở tương lai
+        this.ngayNhap = inputDateWithCheck("Ngày nhập");
+        
+        this.donGia = Test.inputPositiveDouble("Đơn giá: ");
+        this.soLuong = Test.inputPositiveInt("Số lượng: ");
+        this.nhaXuatBan = Test.inputNonEmptyString("Nhà xuất bản: ");
+    }
+    
+    // Phương thức xuất thông tin chung
+    public void xuatThongTin() {
+        System.out.printf("%-10s %-12s %-12s %-8d %-15s ",
+            maSach,
+            ngayNhap.format(DATE_FORMAT),
+            String.format("%.2f", donGia),
+            soLuong,
+            nhaXuatBan);
+    }
+    
+    // Phương thức nhập ngày với kiểm tra không được tương lai
+    private LocalDate inputDateWithCheck(String message) {
+        while (true) {
+            System.out.print(message + " (dd/MM/yyyy): ");
+            String dateString = sc.nextLine();
+            try {
+                LocalDate date = LocalDate.parse(dateString, DATE_FORMAT);
+                LocalDate today = LocalDate.now();
+                
+                // Kiểm tra ngày không được ở tương lai
+                if (date.isAfter(today)) {
+                    System.out.println("Lỗi: Ngày không được ở tương lai! Vui lòng nhập lại.");
+                    continue;
+                }
+                return date;
+            } catch (Exception e) {
+                System.out.println("Lỗi: Định dạng ngày không hợp lệ. Vui lòng nhập lại.");
+            }
+        }
+    }
 }

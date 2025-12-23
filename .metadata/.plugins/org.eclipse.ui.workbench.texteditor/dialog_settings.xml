@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="he ="/>
+		<item key="selection" value="sc"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="sc"/>
+			<item value="inputList"/>
+			<item value="QuanLysinhvien"/>
+			<item value="SinhVien"/>
 			<item value="he ="/>
 			<item value="int he"/>
 			<item value="he"/>
 			<item value="List&lt;SV&gt; SinhVienDaiHoc = new ArrayList&lt;&gt;();"/>
 			<item value="gioi"/>
 			<item value="findacc"/>
-			<item value="SinhVien"/>
 			<item value="nhapThongTinSinhVien"/>
 			<item value="gen"/>
 			<item value="sex"/>
 			<item value="findAccount"/>
 			<item value="inputNonEmptyString"/>
-			<item value="CaoDang"/>
-			<item value="TrungCap"/>
-			<item value="SVDaiHoc"/>
 		</list>
 		<list key="replacehistory">
+			<item value="QuanLySinhVien"/>
+			<item value="sinhvien"/>
 			<item value="SV"/>
 			<item value="nhapThongTinSV"/>
 			<item value="SVCaoDang"/>
@@ -38,12 +40,10 @@
 			<item value="MaS"/>
 			<item value="TinhLuong"/>
 			<item value="DonGiaGio"/>
-			<item value="SoGioLam"/>
-			<item value="PartTimeEmployee("/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1045"/>
+		<item key="DIALOG_X_ORIGIN" value="645"/>
 		<item key="DIALOG_Y_ORIGIN" value="321"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>

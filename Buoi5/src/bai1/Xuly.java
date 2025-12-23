@@ -59,24 +59,57 @@ public class Xuly {
 	
 	
 	public String check_date() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String date;
-        System.out.println("write your birthday (dd/MM/yyyy):");
-        inform.nextLine();
-        while (true) { 
-            try {
-            	
-                date = inform.nextLine();
-                
-                sdf.parse(date);
-                break;
-            } catch (Exception e) {
-                System.out.println("write again birthday (dd/MM/yyyy):");
-            }
-        }
-        return date; 
-    }
-	
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	    sdf.setLenient(false); // QUAN TRỌNG: Không cho phép ngày không hợp lệ
+	    
+	    System.out.print("Nhập ngày sinh (dd/MM/yyyy): ");
+	    inform.nextLine(); // Clear buffer
+	    
+	    while (true) { 
+	        try {
+	            String date = inform.nextLine().trim();
+	            
+	            // Kiểm tra định dạng dd/MM/yyyy
+	            if (!date.matches("\\d{2}/\\d{2}/\\d{4}")) {
+	                System.out.print("Sai định dạng! Vui lòng nhập dd/MM/yyyy: ");
+	                continue;
+	            }
+	            
+	            // Parse để kiểm tra ngày hợp lệ
+	            Date ngaySinh = sdf.parse(date);
+	            Date homNay = new Date();
+	            
+	            // Kiểm tra không phải ngày trong tương lai
+	            if (ngaySinh.after(homNay)) {
+	                System.out.print("Ngày sinh không thể ở tương lai! Nhập lại: ");
+	                continue;
+	            }
+	            
+	            // Kiểm tra năm hợp lý (1900 - năm hiện tại)
+	            Calendar cal = Calendar.getInstance();
+	            cal.setTime(ngaySinh);
+	            int namSinh = cal.get(Calendar.YEAR);
+	            int namHienTai = Calendar.getInstance().get(Calendar.YEAR);
+	            
+	            if (namSinh < 1900 || namSinh > namHienTai) {
+	                System.out.print("Năm sinh phải từ 1900 đến " + namHienTai + "! Nhập lại: ");
+	                continue;
+	            }
+	            
+	            // Kiểm tra tuổi hợp lý (ít nhất 15 tuổi)
+	            int tuoi = namHienTai - namSinh;
+	            if (tuoi < 15) {
+	                System.out.print("Tuổi phải từ 15 trở lên! Nhập lại: ");
+	                continue;
+	            }
+	            
+	            return date;
+	            
+	        } catch (java.text.ParseException e) {
+	            System.out.print("Ngày không hợp lệ! Vui lòng nhập lại (dd/MM/yyyy): ");
+	        }
+	    }
+	}
 	public String Check_sex() {
 		String sex;
 		while (true) {
