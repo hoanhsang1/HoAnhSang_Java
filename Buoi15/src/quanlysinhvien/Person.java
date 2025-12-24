@@ -1,21 +1,15 @@
 package quanlysinhvien;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.Period;
-import TaomoiTV.Test;
+import java.util.Scanner;
 
 public abstract class Person {
-    // Thuộc tính
     protected String hoTen;
-    protected LocalDate ngaySinh;
-    protected DiaChi diaChi; // Thay String bằng đối tượng DiaChi
+    protected Date ngaySinh;
+    protected DiaChi diaChi;
     
-    protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
-    // Constructor
     public Person() {
         diaChi = new DiaChi();
+        ngaySinh = new Date();
     }
     
     // Getter - Setter
@@ -27,11 +21,11 @@ public abstract class Person {
         this.hoTen = hoTen;
     }
     
-    public LocalDate getNgaySinh() {
+    public Date getNgaySinh() {
         return ngaySinh;
     }
     
-    public void setNgaySinh(LocalDate ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
     
@@ -45,38 +39,74 @@ public abstract class Person {
     
     // Tính tuổi
     public int tinhTuoi() {
-        return Period.between(ngaySinh, LocalDate.now()).getYears();
+        return ngaySinh.tinhTuoi();
     }
     
     // Phương thức trừu tượng
     public abstract void nhapThongTin();
     public abstract void xuatThongTin();
     
-    // Phương thức nhập ngày sinh với kiểm tra tuổi tối thiểu
-    protected LocalDate inputNgaySinh(int tuoiToiThieu) {
+    // Phương thức tiện ích
+    protected String inputNonEmptyString(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        String value;
         while (true) {
-            System.out.print("Ngày sinh (dd/MM/yyyy): ");
-            String dateString = new java.util.Scanner(System.in).nextLine();
+            System.out.print(prompt);
+            value = scanner.nextLine().trim();
+            if (!value.isEmpty()) {
+                return value;
+            }
+            System.out.println("Không được để trống!");
+        }
+    }
+    
+    protected int inputPositiveInt(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        int value;
+        while (true) {
+            System.out.print(prompt);
             try {
-                LocalDate date = LocalDate.parse(dateString, DATE_FORMAT);
-                LocalDate today = LocalDate.now();
-                
-                // Kiểm tra ngày không được ở tương lai
-                if (date.isAfter(today)) {
-                    System.out.println("Lỗi: Ngày sinh không được ở tương lai!");
-                    continue;
+                value = Integer.parseInt(scanner.nextLine());
+                if (value > 0) {
+                    return value;
                 }
-                
-                // Kiểm tra tuổi tối thiểu
-                int tuoi = Period.between(date, today).getYears();
-                if (tuoi < tuoiToiThieu) {
-                    System.out.println("Lỗi: Phải đủ " + tuoiToiThieu + " tuổi trở lên! (Tuổi hiện tại: " + tuoi + ")");
-                    continue;
+                System.out.println("Giá trị phải lớn hơn 0!");
+            } catch (NumberFormatException e) {
+                System.out.println("Vui lòng nhập số nguyên hợp lệ!");
+            }
+        }
+    }
+    
+    protected float inputFloatInRange(String prompt, float min, float max) {
+        Scanner scanner = new Scanner(System.in);
+        float value;
+        while (true) {
+            System.out.print(prompt);
+            try {
+                value = Float.parseFloat(scanner.nextLine());
+                if (value >= min && value <= max) {
+                    return value;
                 }
-                
-                return date;
-            } catch (Exception e) {
-                System.out.println("Lỗi: Định dạng ngày không hợp lệ!");
+                System.out.println("Giá trị phải từ " + min + " đến " + max + "!");
+            } catch (NumberFormatException e) {
+                System.out.println("Vui lòng nhập số hợp lệ!");
+            }
+        }
+    }
+    
+    protected int inputIntInRange(String prompt, int min, int max) {
+        Scanner scanner = new Scanner(System.in);
+        int value;
+        while (true) {
+            System.out.print(prompt);
+            try {
+                value = Integer.parseInt(scanner.nextLine());
+                if (value >= min && value <= max) {
+                    return value;
+                }
+                System.out.println("Giá trị phải từ " + min + " đến " + max + "!");
+            } catch (NumberFormatException e) {
+                System.out.println("Vui lòng nhập số nguyên hợp lệ!");
             }
         }
     }

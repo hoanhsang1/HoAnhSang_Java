@@ -1,25 +1,23 @@
 package quanlysinhvien;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Faculty {
-    // Thuộc tính
     private String maKhoa;
     private String tenKhoa;
-    private LocalDate ngayThanhLap;
-    private School truong; // Khoa thuộc về trường nào
+    private Date ngayThanhLap;
+    private ArrayList<SinhVien> danhSachSV;
     
-    // Constructor
     public Faculty() {
+        ngayThanhLap = new Date();
+        danhSachSV = new ArrayList<>();
     }
     
-    // Constructor có tham số
-    public Faculty(String maKhoa, String tenKhoa, School truong) {
+    public Faculty(String maKhoa, String tenKhoa) {
+        this();
         this.maKhoa = maKhoa;
         this.tenKhoa = tenKhoa;
-        this.truong = truong;
     }
     
     // Getter - Setter
@@ -39,81 +37,75 @@ public class Faculty {
         this.tenKhoa = tenKhoa;
     }
     
-    public LocalDate getNgayThanhLap() {
+    public Date getNgayThanhLap() {
         return ngayThanhLap;
     }
     
-    public void setNgayThanhLap(LocalDate ngayThanhLap) {
+    public void setNgayThanhLap(Date ngayThanhLap) {
         this.ngayThanhLap = ngayThanhLap;
     }
     
-    public School getTruong() {
-        return truong;
+    public ArrayList<SinhVien> getDanhSachSV() {
+        return danhSachSV;
     }
     
-    public void setTruong(School truong) {
-        this.truong = truong;
+    // Thêm sinh viên
+    public void themSinhVien(SinhVien sv) {
+        danhSachSV.add(sv);
     }
     
     // Nhập thông tin khoa
-    public void nhapThongTin(School truongHienTai) {
+    public void nhapThongTin() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== NHẬP THÔNG TIN KHOA ===");
         
-        // Gán trường cho khoa
-        this.truong = truongHienTai;
+        this.maKhoa = inputNonEmptyString("Mã khoa: ");
+        this.tenKhoa = inputNonEmptyString("Tên khoa: ");
         
-        System.out.print("Mã khoa: ");
-        this.maKhoa = new Scanner(System.in).nextLine().trim();
-        System.out.print("Tên khoa: ");
-        this.tenKhoa = new Scanner(System.in).nextLine().trim();
-        
-        // Nhập ngày thành lập
+        // Nhập và kiểm tra ngày thành lập khoa phải sau ngày thành lập trường
         while (true) {
-            System.out.print("Ngày thành lập (dd/MM/yyyy): ");
-            String dateString = new Scanner(System.in).nextLine();
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                this.ngayThanhLap = LocalDate.parse(dateString, formatter);
-                
-                // Kiểm tra ngày thành lập khoa không được trước ngày thành lập trường
-                if (this.ngayThanhLap.isBefore(truongHienTai.getNgayThanhLap())) {
-                    System.out.println("Ngày thành lập khoa không được trước ngày thành lập trường!");
-                    continue;
-                }
-                break;
-            } catch (Exception e) {
-                System.out.println("Lỗi: Định dạng ngày không hợp lệ!");
+            System.out.print("Nhập ngày thành lập khoa");
+            this.ngayThanhLap = Date.nhapNgay("", 0);
+            
+            // Lấy trường hiện tại
+            School truong = School.getInstance();
+            if (truong.getNgayThanhLap() == null) {
+                System.out.println("Vui lòng nhập thông tin trường trước!");
+                return;
             }
+            
+            if (this.ngayThanhLap.isTruoc(truong.getNgayThanhLap())) {
+                System.out.println("Lỗi: Ngày thành lập khoa phải sau ngày thành lập trường (" + 
+                    truong.getNgayThanhLap().toString() + ")");
+                continue;
+            }
+            break;
         }
     }
     
-    // Xuất thông tin khoa
+    // Xuất thông tin
     public void xuatThongTin() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        System.out.printf("%-10s %-25s %-12s %-15s\n",
-            maKhoa,
-            tenKhoa,
-            ngayThanhLap.format(formatter),
-            (truong != null ? truong.getTenTruong() : "Chưa có trường"));
-    }
-    public void xuatThongTinDayDu() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("\n══════════════════════════════════════════════");
-        System.out.println("            THÔNG TIN CHI TIẾT KHOA");
+        System.out.println("              THÔNG TIN KHOA");
         System.out.println("══════════════════════════════════════════════");
         System.out.println("Mã khoa: " + maKhoa);
         System.out.println("Tên khoa: " + tenKhoa);
-        System.out.println("Ngày thành lập: " + ngayThanhLap.format(formatter));
-        System.out.println("Thuộc trường: " + (truong != null ? 
-            truong.getTenTruong() + " (Mã: " + truong.getMaTruong() + ")" : "Chưa có trường"));
+        System.out.println("Ngày thành lập: " + ngayThanhLap.toString());
+        System.out.println("Số sinh viên: " + danhSachSV.size());
         System.out.println("══════════════════════════════════════════════");
     }
-    // Xuất tiêu đề
-    public static void xuatTieuDe() {
-        System.out.println("\n══════════════════════════════════════════════════════════════════════════════════");
-        System.out.println("                                      DANH SÁCH KHOA");
-        System.out.println("══════════════════════════════════════════════════════════════════════════════════");
-        System.out.printf("%-10s %-25s %-12s %-15s\n", "Mã khoa", "Tên khoa", "Ngày TL", "Trường");
-        System.out.println("──────────────────────────────────────────────────────────────────────────────────");
+    
+    // Helper methods
+    private String inputNonEmptyString(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        String value;
+        while (true) {
+            System.out.print(prompt);
+            value = scanner.nextLine().trim();
+            if (!value.isEmpty()) {
+                return value;
+            }
+            System.out.println("Không được để trống!");
+        }
     }
 }

@@ -15,14 +15,47 @@ public class CaoDang extends SinhVienNienChe {
     }
     
     @Override
-    public void nhapThongTin() {
+    public String getHeDaoTao() {
+        return "Cao đẳng (3 năm)";
+    }
+    
+    @Override
+    public void nhapThongTin(String maSV) {
+        Scanner scanner = new Scanner(System.in);
+        
         System.out.println("\n=== NHẬP THÔNG TIN SINH VIÊN CAO ĐẲNG ===");
         
-        // Nhập thông tin chung
-        super.nhapThongTin();
+        // Nhập thông tin cá nhân từ lớp cha
+        super.nhapThongTin(maSV);
         
-        // Nhập ngày sinh (cao đẳng phải trên 18 tuổi)
-        System.out.println("\n--- Thông tin sinh viên Cao đẳng ---");
-        this.ngaySinh = inputNgaySinh(18);
+        // VALIDATE TUỔI CAO ĐẲNG (>= 18)
+        while (tinhTuoi() < 18) {
+            System.out.println("\n⚠️ LỖI: Sinh viên cao đẳng phải đủ 18 tuổi!");
+            System.out.println("Tuổi hiện tại: " + tinhTuoi() + " tuổi");
+            System.out.print("Nhập lại ngày sinh");
+            this.ngaySinh = Date.nhapNgay("", 0);
+        }
+        
+        System.out.println("\n--- THÔNG TIN HỌC TẬP ---");
+        
+        // Nhập chi tiết đào tạo
+        this.tenDetail = inputNonEmptyString("Chi tiết đào tạo: ");
+        
+        // Nhập điểm tốt nghiệp
+        while (true) {
+            System.out.print("Điểm tốt nghiệp (0-10): ");
+            try {
+                this.diemTN = Float.parseFloat(scanner.nextLine());
+                if (diemTN >= 0 && diemTN <= 10) {
+                    tinhXepLoai();
+                    break;
+                }
+                System.out.println("Điểm phải từ 0 đến 10!");
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số hợp lệ!");
+            }
+        }
+        
+        System.out.println("✓ Đã nhập xong thông tin sinh viên cao đẳng!");
     }
 }

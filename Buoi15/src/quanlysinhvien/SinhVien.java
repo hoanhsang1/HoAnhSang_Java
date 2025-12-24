@@ -1,15 +1,12 @@
 package quanlysinhvien;
 
-import java.time.LocalDate;
-import TaomoiTV.Test;
+import java.util.Scanner;
 
 public abstract class SinhVien extends Person {
-    // Thuộc tính chung
     protected String maSV;
     protected String gioiTinh;
     protected Faculty khoa;
     
-    // Constructor
     public SinhVien() {
         super();
     }
@@ -42,44 +39,67 @@ public abstract class SinhVien extends Person {
     // Phương thức trừu tượng
     public abstract String getXepLoai();
     public abstract boolean isTotNghiep();
-    public abstract boolean isDuocKhenThuong(); // Thêm phương thức trừu tượng
+    public abstract boolean isDuocKhenThuong();
+    public abstract float getDiem();
+    public abstract String getHeDaoTao();
+    public abstract void capNhatDiem(); // Cập nhật điểm
     
-    @Override
-    public void nhapThongTin() {
-        System.out.println("\n=== NHẬP THÔNG TIN SINH VIÊN ===");
+    public void nhapThongTin(String maSV) {
+        Scanner scanner = new Scanner(System.in);
         
-        this.maSV = Test.inputNonEmptyString("Mã sinh viên: ");
+        // Gán mã sinh viên
+        this.maSV = maSV;
+        
+        System.out.println("\n--- THÔNG TIN CÁ NHÂN ---");
         
         // Nhập họ tên
-        this.hoTen = Test.inputNonEmptyString("Họ tên: ");
+        this.hoTen = inputNonEmptyString("Họ tên: ");
         
         // Nhập giới tính
         while (true) {
             System.out.print("Giới tính (Nam/Nữ): ");
-            this.gioiTinh = new java.util.Scanner(System.in).nextLine().trim();
+            this.gioiTinh = scanner.nextLine().trim();
             if (this.gioiTinh.equalsIgnoreCase("Nam") || this.gioiTinh.equalsIgnoreCase("Nữ")) {
                 break;
             }
             System.out.println("Giới tính phải là 'Nam' hoặc 'Nữ'!");
         }
         
-        // Nhập địa chỉ chi tiết
-        System.out.println("\n--- Nhập thông tin địa chỉ ---");
+        // Nhập ngày sinh (tuổi tối thiểu sẽ được validate trong lớp con)
+        System.out.print("Nhập ngày sinh");
+        this.ngaySinh = Date.nhapNgay("", 0);
+        
+        // Nhập địa chỉ
         this.diaChi.nhapThongTin();
+    }
+    @Override
+    public void nhapThongTin() {
+        // Không dùng
     }
     
     @Override
     public void xuatThongTin() {
         System.out.printf("%-10s %-25s %-8s %-12s %-5d %-40s ",
-            maSV,
-            hoTen,
-            gioiTinh,
-            ngaySinh.format(DATE_FORMAT),
-            tinhTuoi(),
-            diaChi.toStringShort());
+            maSV, hoTen, gioiTinh, ngaySinh.toString(), 
+            tinhTuoi(), diaChi.toStringShort());
     }
     
-    // Xuất tiêu đề chung
+    // Xuất thông tin chi tiết
+    public void xuatThongTinChiTiet() {
+        System.out.println("\n══════════════════════════════════════════════");
+        System.out.println("          THÔNG TIN SINH VIÊN");
+        System.out.println("══════════════════════════════════════════════");
+        System.out.println("Mã SV: " + maSV);
+        System.out.println("Họ tên: " + hoTen);
+        System.out.println("Giới tính: " + gioiTinh);
+        System.out.println("Ngày sinh: " + ngaySinh.toString() + " (Tuổi: " + tinhTuoi() + ")");
+        System.out.println("Địa chỉ: " + diaChi.toString());
+        System.out.println("Khoa: " + (khoa != null ? khoa.getTenKhoa() : "Chưa có"));
+        System.out.println("Hệ đào tạo: " + getHeDaoTao());
+        System.out.println("══════════════════════════════════════════════");
+    }
+    
+    // Xuất tiêu đề
     public static void xuatTieuDe() {
         System.out.println("\n═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
         System.out.println("                                                                                          DANH SÁCH SINH VIÊN");

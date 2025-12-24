@@ -1,20 +1,17 @@
 package quanlysinhvien;
 
-import TaomoiTV.Test;
+import java.util.Scanner;
 
 public class DiaChi {
-    // Thuộc tính
     private String soNha;
     private String duong;
     private String phuongXa;
     private String quanHuyen;
     private String tinhThanh;
     
-    // Constructor
     public DiaChi() {
     }
     
-    // Constructor có tham số
     public DiaChi(String soNha, String duong, String phuongXa, String quanHuyen, String tinhThanh) {
         this.soNha = soNha;
         this.duong = duong;
@@ -64,28 +61,54 @@ public class DiaChi {
         this.tinhThanh = tinhThanh;
     }
     
-    // Nhập thông tin địa chỉ
+    // Nhập thông tin
     public void nhapThongTin() {
-        System.out.println("\n=== NHẬP THÔNG TIN ĐỊA CHỈ ===");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n--- NHẬP THÔNG TIN ĐỊA CHỈ ---");
         System.out.print("Số nhà: ");
-        this.soNha = new java.util.Scanner(System.in).nextLine().trim();
+        this.soNha = scanner.nextLine().trim();
         System.out.print("Đường: ");
-        this.duong = new java.util.Scanner(System.in).nextLine().trim();
+        this.duong = scanner.nextLine().trim();
         System.out.print("Phường/Xã: ");
-        this.phuongXa = new java.util.Scanner(System.in).nextLine().trim();
+        this.phuongXa = scanner.nextLine().trim();
         System.out.print("Quận/Huyện: ");
-        this.quanHuyen = new java.util.Scanner(System.in).nextLine().trim();
+        this.quanHuyen = scanner.nextLine().trim();
         System.out.print("Tỉnh/Thành phố: ");
-        this.tinhThanh = new java.util.Scanner(System.in).nextLine().trim();
+        this.tinhThanh = scanner.nextLine().trim();
     }
     
-    // Xuất thông tin địa chỉ
+    // Cập nhật địa chỉ
+    public void capNhatDiaChi() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n=== CẬP NHẬT ĐỊA CHỈ ===");
+        System.out.print("Số nhà mới (Enter để giữ nguyên): ");
+        String input = scanner.nextLine().trim();
+        if (!input.isEmpty()) this.soNha = input;
+        
+        System.out.print("Đường mới (Enter để giữ nguyên): ");
+        input = scanner.nextLine().trim();
+        if (!input.isEmpty()) this.duong = input;
+        
+        System.out.print("Phường/Xã mới (Enter để giữ nguyên): ");
+        input = scanner.nextLine().trim();
+        if (!input.isEmpty()) this.phuongXa = input;
+        
+        System.out.print("Quận/Huyện mới (Enter để giữ nguyên): ");
+        input = scanner.nextLine().trim();
+        if (!input.isEmpty()) this.quanHuyen = input;
+        
+        System.out.print("Tỉnh/Thành phố mới (Enter để giữ nguyên): ");
+        input = scanner.nextLine().trim();
+        if (!input.isEmpty()) this.tinhThanh = input;
+        
+        System.out.println("✓ Đã cập nhật địa chỉ!");
+    }
+    
     @Override
     public String toString() {
         return soNha + " " + duong + ", " + phuongXa + ", " + quanHuyen + ", " + tinhThanh;
     }
     
-    // Xuất thông tin ngắn gọn
     public String toStringShort() {
         return soNha + " " + duong + ", " + quanHuyen + ", " + tinhThanh;
     }
