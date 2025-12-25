@@ -27,6 +27,15 @@ public class NhanVien {
     public String getChucVu() { return chucVu; }
     public PhongBan getPhongBan() { return phongBan; }
     public Quyen getQuyen() { return quyen; }
+    public void setQuyen(Quyen quyen) {
+        if (quyen == null) throw new IllegalArgumentException("Quyền không được null");
+        this.quyen = quyen;
+        
+        // Tự động cập nhật chức vụ nếu cần
+        if (quyen == Quyen.TRUONG_PHONG && !chucVu.toLowerCase().contains("trưởng phòng")) {
+            this.chucVu = "Trưởng phòng";
+        }
+    }
     
     public boolean laTruongPhong() {
         return quyen == Quyen.TRUONG_PHONG;

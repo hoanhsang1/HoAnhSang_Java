@@ -25,6 +25,8 @@ public enum Quyen {
         return this.capDo < quyenKhac.getCapDo();
     }
     
+    
+    
     @Override
     public String toString() {
         return tenQuyen;
