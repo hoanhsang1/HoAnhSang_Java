@@ -1,0 +1,3 @@
+module ThuVienSang {
+	exports ThuVienSang;
+}

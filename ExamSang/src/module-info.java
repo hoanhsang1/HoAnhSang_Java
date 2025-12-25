@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+module ExamSang {
+	requires ThuVienSang;
+}

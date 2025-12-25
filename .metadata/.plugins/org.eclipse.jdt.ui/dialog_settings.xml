@@ -92,13 +92,14 @@
 		<item key="JarManifestWizardPage.MANIFEST_LOCATION" value=""/>
 		<item key="JarManifestWizardPage.SEAL_JAR" value="false"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="D:\java\Thuvien\ThuVienSang.jar"/>
 			<item value="D:\java\Thuvien\TaomoiTV.jar"/>
 			<item value="D:\java\Thuvien\libTest.jar"/>
 			<item value="D:\java\Thuvien\libText.jar"/>
 			<item value="D:\java\Thuvien\textlib.jar"/>
 		</list>
 		<section name="JarPackageWizard.dialogBounds">
-			<item key="DIALOG_X_ORIGIN" value="706"/>
+			<item key="DIALOG_X_ORIGIN" value="651"/>
 			<item key="DIALOG_Y_ORIGIN" value="187"/>
 			<item key="DIALOG_WIDTH" value="563"/>
 			<item key="DIALOG_HEIGHT" value="667"/>
