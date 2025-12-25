@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="cap"/>
+		<item key="selection" value="inputNonEmptyString"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="inputString"/>
+			<item value="nhapPhieuKiemKeTuBanPhim"/>
+			<item value="inputCode"/>
+			<item value="themNhan"/>
+			<item value="kiemTraTrungTrinhTruongPhong"/>
+			<item value="themPhong"/>
+			<item value="Date"/>
+			<item value="inputSimpleDate"/>
+			<item value="input"/>
 			<item value="cap"/>
 			<item value="nhapThongTin"/>
 			<item value="getNgay"/>
 			<item value="sc"/>
 			<item value="inputList"/>
 			<item value="QuanLysinhvien"/>
-			<item value="SinhVien"/>
-			<item value="he ="/>
-			<item value="int he"/>
-			<item value="he"/>
-			<item value="List&lt;SV&gt; SinhVienDaiHoc = new ArrayList&lt;&gt;();"/>
-			<item value="gioi"/>
-			<item value="findacc"/>
-			<item value="nhapThongTinSinhVien"/>
-			<item value="gen"/>
 		</list>
 		<list key="replacehistory">
+			<item value="inputNonEmptyString"/>
 			<item value="QuanLySinhVien"/>
 			<item value="sinhvien"/>
 			<item value="SV"/>
@@ -39,11 +40,10 @@
 			<item value="sách"/>
 			<item value="MaS"/>
 			<item value="TinhLuong"/>
-			<item value="DonGiaGio"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="896"/>
+		<item key="DIALOG_X_ORIGIN" value="1076"/>
 		<item key="DIALOG_Y_ORIGIN" value="310"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
